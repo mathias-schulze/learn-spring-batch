@@ -1,0 +1,17 @@
+version: '3'
+services:
+  mariadb:
+    image: mariadb:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: spring_batch_db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: pass
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
+    volumes:
+      - spring_batch_db:/var/lib/mysql
+volumes:
+  spring_batch_db: {}
