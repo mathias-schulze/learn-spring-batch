@@ -7,7 +7,10 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @EnableBatchProcessing
-@ComponentScan("de.msz.learn.spring.batch.config")
+@ComponentScan({
+	"de.msz.learn.spring.batch.config",
+	"de.msz.learn.spring.batch.service"
+})
 public class LearnSpringBatchApplication {
 
 	public static void main(String[] args) {

@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import de.msz.learn.spring.batch.service.SecondTasklet;
+
 @Configuration
 public class SampleJob {
 	
@@ -21,10 +23,14 @@ public class SampleJob {
 	@Autowired
 	private StepBuilderFactory stepBuilderFactory;
 	
+	@Autowired
+	private SecondTasklet secondTasklet;
+	
 	@Bean
 	public Job firstJob() {
 		return jobBuilderFactory.get("First Job")
 				.start(firstStep())
+				.next(secondStep())
 				.build();
 	}
 	
@@ -43,5 +49,11 @@ public class SampleJob {
 				return RepeatStatus.FINISHED;
 			}
 		};
+	}
+	
+	private Step secondStep() {
+		return stepBuilderFactory.get("Second Step")
+				.tasklet(secondTasklet)
+				.build();
 	}
 }
