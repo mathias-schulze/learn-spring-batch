@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import de.msz.learn.spring.batch.listener.FirstJobListener;
 import de.msz.learn.spring.batch.service.SecondTasklet;
 
 @Configuration
@@ -27,12 +28,16 @@ public class SampleJob {
 	@Autowired
 	private SecondTasklet secondTasklet;
 	
+	@Autowired
+	private FirstJobListener firstJobListener;
+	
 	@Bean
 	public Job firstJob() {
 		return jobBuilderFactory.get("First Job")
 				.incrementer(new RunIdIncrementer())
 				.start(firstStep())
 				.next(secondStep())
+				.listener(firstJobListener)
 				.build();
 	}
 	

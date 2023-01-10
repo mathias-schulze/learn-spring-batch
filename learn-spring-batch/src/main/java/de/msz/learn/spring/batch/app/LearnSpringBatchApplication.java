@@ -9,7 +9,8 @@ import org.springframework.context.annotation.ComponentScan;
 @EnableBatchProcessing
 @ComponentScan({
 	"de.msz.learn.spring.batch.config",
-	"de.msz.learn.spring.batch.service"
+	"de.msz.learn.spring.batch.service",
+	"de.msz.learn.spring.batch.listener"
 })
 public class LearnSpringBatchApplication {
 
