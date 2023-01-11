@@ -14,6 +14,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import de.msz.learn.spring.batch.listener.FirstJobListener;
+import de.msz.learn.spring.batch.listener.FirstStepListener;
 import de.msz.learn.spring.batch.service.SecondTasklet;
 
 @Configuration
@@ -31,6 +32,9 @@ public class SampleJob {
 	@Autowired
 	private FirstJobListener firstJobListener;
 	
+	@Autowired
+	private FirstStepListener firstStepListener;
+	
 	@Bean
 	public Job firstJob() {
 		return jobBuilderFactory.get("First Job")
@@ -44,6 +48,7 @@ public class SampleJob {
 	private Step firstStep() {
 		return stepBuilderFactory.get("First Step")
 				.tasklet(firstTask())
+				.listener(firstStepListener)
 				.build();
 	}
 	
