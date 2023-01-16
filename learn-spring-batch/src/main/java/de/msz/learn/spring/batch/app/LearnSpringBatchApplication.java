@@ -10,7 +10,10 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan({
 	"de.msz.learn.spring.batch.config",
 	"de.msz.learn.spring.batch.service",
-	"de.msz.learn.spring.batch.listener"
+	"de.msz.learn.spring.batch.listener",
+	"de.msz.learn.spring.batch.reader",
+	"de.msz.learn.spring.batch.processor",
+	"de.msz.learn.spring.batch.writer"
 })
 public class LearnSpringBatchApplication {
 

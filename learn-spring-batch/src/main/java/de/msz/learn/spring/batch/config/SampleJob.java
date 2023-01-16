@@ -15,7 +15,10 @@ import org.springframework.context.annotation.Configuration;
 
 import de.msz.learn.spring.batch.listener.FirstJobListener;
 import de.msz.learn.spring.batch.listener.FirstStepListener;
+import de.msz.learn.spring.batch.processor.FirstItemProcessor;
+import de.msz.learn.spring.batch.reader.FirstItemReader;
 import de.msz.learn.spring.batch.service.SecondTasklet;
+import de.msz.learn.spring.batch.writer.FirstItemWriter;
 
 @Configuration
 public class SampleJob {
@@ -35,7 +38,16 @@ public class SampleJob {
 	@Autowired
 	private FirstStepListener firstStepListener;
 	
-	@Bean
+	@Autowired
+	private FirstItemReader firstItemReader;
+	
+	@Autowired
+	private FirstItemProcessor firstItemProcessor;
+	
+	@Autowired
+	private FirstItemWriter firstItemWriter;
+	
+	//@Bean
 	public Job firstJob() {
 		return jobBuilderFactory.get("First Job")
 				.incrementer(new RunIdIncrementer())
@@ -66,6 +78,23 @@ public class SampleJob {
 	private Step secondStep() {
 		return stepBuilderFactory.get("Second Step")
 				.tasklet(secondTasklet)
+				.build();
+	}
+	
+	@Bean
+	public Job secondJob() {
+		return jobBuilderFactory.get("Second Job")
+				.incrementer(new RunIdIncrementer())
+				.start(firstChunkStep())
+				.build();
+	}
+	
+	private Step firstChunkStep() {
+		return stepBuilderFactory.get("First Chunk Size")
+				.<Integer, Long>chunk(3)
+				.reader(firstItemReader)
+				.processor(firstItemProcessor)
+				.writer(firstItemWriter)
 				.build();
 	}
 }
