@@ -4,6 +4,7 @@ import org.springframework.batch.core.configuration.annotation.EnableBatchProces
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.scheduling.annotation.EnableAsync;
 
 @SpringBootApplication
 @EnableBatchProcessing
@@ -13,8 +14,10 @@ import org.springframework.context.annotation.ComponentScan;
 	"de.msz.learn.spring.batch.listener",
 	"de.msz.learn.spring.batch.reader",
 	"de.msz.learn.spring.batch.processor",
-	"de.msz.learn.spring.batch.writer"
+	"de.msz.learn.spring.batch.writer",
+	"de.msz.learn.spring.batch.controller"
 })
+@EnableAsync
 public class LearnSpringBatchApplication {
 
 	public static void main(String[] args) {
