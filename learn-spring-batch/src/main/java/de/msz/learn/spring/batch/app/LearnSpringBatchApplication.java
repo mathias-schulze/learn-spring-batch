@@ -5,6 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
 @EnableBatchProcessing
@@ -18,6 +19,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 	"de.msz.learn.spring.batch.controller"
 })
 @EnableAsync
+@EnableScheduling
 public class LearnSpringBatchApplication {
 
 	public static void main(String[] args) {
